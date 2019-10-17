@@ -1,1 +1,2 @@
-# mp-eks-demo
+# Running Paid EKS Products
+
