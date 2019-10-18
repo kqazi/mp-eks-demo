@@ -30,9 +30,9 @@ eksctl create cluster \
 	--node-ami auto
 ```
 
-### Configure IAM to K8 Service Account Mapping
+### Configure [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
 
-1. Create IAM Policy that enables Paid Container product billing on EKS.
+1. Create IAM Policy that enables Paid Container product billing on EKS. Copy the ARN for this policy as it will be used in step #2.
 
 ```
 {
@@ -49,18 +49,31 @@ eksctl create cluster \
 }
 ```
 
-2. Enable IAM Roles for Service Accounts
+2. Associate EKS OIDC Provider with IAM
 
+This command will map the EKS OIDC provider that was created during cluster creation in IAM. You can verify that this is setup correctly by going to your EKS cluster in the AWS Console and ensuring that the "OpenID Connect provider URL" is configured in the IAM Console under "Identity Provders" section. 
+
+```
+eksctl utils associate-iam-oidc-provider \
+  --name mp-eks-irsa \
+  --approve
+```
+
+3. MAP IAM Role to K8 Serivce Account 
 This command will create a K8 service account, IAM Role based on policy in step #1 and annotate the K8 service account with the IAM Role. 
 
 ```
 eksctl create iamserviceaccount \
   --name solodev-serviceaccount \
   --namespace default \
-  --cluster mp-eks-irsa-2 \
+  --cluster mp-eks-irsa \
   --attach-policy-arn [iam-policy-arn-from-step-1] \
   --approve
 ```
+
+Verify K8 Service account created: `kubectl get sa solodev-serviceaccount -o yaml`
+
+Verify IAM Role created
 
 1. Subscribe to EKS enabled Paid Container product on AWS Marketplace [Solodev DCX Enterprise Edition for Kubernetes] (https://aws.amazon.com/marketplace/pp/B07XV951M6?qid=1571433963481&sr=0-2&ref_=srh_res_product_title)
 2. Configure IAM Roles for Service Accounts on EKS cluster 
