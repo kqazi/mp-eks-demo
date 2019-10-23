@@ -71,7 +71,23 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-Verify K8 Service account created: `kubectl get sa solodev-serviceaccount -o yaml`
+Verify K8 Service account creation: `kubectl get sa solodev-serviceaccount -o yaml`. You should see output similar to the below. You'll notice that the IAM Role has been automatically created for you (using the policy supplied to the command above) and the K8 service account annotation with the IAM Role. **If the IAM Role is not in the annotation IAM Roles for Service Accounts will not work.**
+
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::[aws-account-id]:role/eksctl-mp-eks-irsa-2-addon-iamserviceaccount-Role1-1E5XV9GAJMF5A
+  creationTimestamp: "2019-10-18T22:28:51Z"
+  name: solodev-serviceaccount
+  namespace: default
+  resourceVersion: "7001"
+  selfLink: /api/v1/namespaces/default/serviceaccounts/solodev-serviceaccount
+  uid: a8f52cc4-f1f6-11e9-a317-06d79cb9eeea
+secrets:
+- name: solodev-serviceaccount-token-6k66t
+```
 
 Verify IAM Role created
 
