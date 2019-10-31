@@ -161,3 +161,7 @@ You should see output similar to:
 ```
 
 Copy this into your browser and you should see the SoloDev login page.
+
+### Shutdown EKS Cluster
+
+Go to the CloudFormation console and delete the CF Stacks that were automatically created by `eksctl`.
