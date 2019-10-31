@@ -78,7 +78,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::[aws-account-id]:role/eksctl-mp-eks-irsa-2-addon-iamserviceaccount-Role1-1E5XV9GAJMF5A
+    eks.amazonaws.com/role-arn: arn:aws:iam::[aws-account-id]:role/eksctl-mp-eks-irsa-addon-iamserviceaccount-Role1-1E5XV9GAJMF5A
   creationTimestamp: "2019-10-18T22:28:51Z"
   name: solodev-serviceaccount
   namespace: default
