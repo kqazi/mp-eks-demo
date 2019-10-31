@@ -89,8 +89,75 @@ secrets:
 - name: solodev-serviceaccount-token-6k66t
 ```
 
-Verify IAM Role created
+4. Verify IAM Role created
 
-1. Subscribe to EKS enabled Paid Container product on AWS Marketplace [Solodev DCX Enterprise Edition for Kubernetes] (https://aws.amazon.com/marketplace/pp/B07XV951M6?qid=1571433963481&sr=0-2&ref_=srh_res_product_title)
-2. Configure IAM Roles for Service Accounts on EKS cluster 
-Launch product using Helm
+Go to the IAM Console and verify that the role referenced in the service account annotation above exists, and that the policy attached to the role allows calls to `RegisterUsage`. You should this policy attached to the role:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "aws-marketplace:RegisterUsage"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ]
+}
+```
+
+5. Subscribe and Launch EKS Product
+
+Subscribe to EKS enabled Paid Container product on AWS Marketplace [Solodev DCX Enterprise Edition for Kubernetes] (https://aws.amazon.com/marketplace/pp/B07XV951M6?qid=1571433963481&sr=0-2&ref_=srh_res_product_title).This is a paid AWS Marketplace product that will charge based on a pay-as-you-go hourly rate.
+
+After you subscribe run:
+
+```
+helm repo add charts 'https://raw.githubusercontent.com/techcto/charts/master/'
+helm repo update
+helm repo list
+```
+
+Next start up Tiller in the background in your local environment:
+
+``` 
+tiller -listen=localhost:44134 -storage=secret -logtostderr 
+```
+
+Now install SoloDev:
+
+```
+helm install --name solodev-dcx charts/solodev-dcx-aws \
+  --set serviceAccountName='solodev-serviceaccount' \
+  --set solodev.storage.className=gp2 \
+  --set solodev.settings.appSecret=secret \
+  --set solodev.settings.appPassword=password \
+  --set solodev.settings.dbPassword=password
+```
+
+**NOTE:** If you get an error that Tiller can't be found make sure you setup Tiller correctly by following the steps here: https://docs.aws.amazon.com/eks/latest/userguide/helm.html
+
+You can check the status of the deployment by runninug: `kubectl get pods`. You should see output similar to:
+
+```
+NAME                                   READY   STATUS    RESTARTS   AGE
+solodev-dcx-mongo-6894cfcf99-b44mt     1/1     Running   0          2m31s
+solodev-dcx-mysql-0                    2/2     Running   0          2m31s
+solodev-dcx-redis-0                    1/1     Running   0          2m30s
+solodev-dcx-solodev-779b466dc9-brqh9   1/1     Running   1          2m31s
+solodev-dcx-ui-7dd69c7fb5-wrmgn        1/1     Running   0          2m31s
+```
+Once all pods are in a RUNNING state execute:
+
+```
+kubectl get svc solodev-dcx-ui -o yaml | grep hostname
+```
+
+You should see output similar to:
+```
+    - hostname: ac5ad876cfbe711e9a9ce02dcc828796-ec827f76ebc5baa2.elb.us-east-2.amazonaws.com
+```
+
+Copy this into your browser and you should see the SoloDev login page.
