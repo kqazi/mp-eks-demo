@@ -49,7 +49,7 @@ eksctl create cluster \
 }
 ```
 
-2. Associate EKS OIDC Provider with IAM
+### Associate EKS OIDC Provider with IAM
 
 This command will map the EKS OIDC provider that was created during cluster creation in IAM. You can verify that this is setup correctly by going to your EKS cluster in the AWS Console and ensuring that the "OpenID Connect provider URL" is configured in the IAM Console under "Identity Provders" section. 
 
@@ -59,7 +59,7 @@ eksctl utils associate-iam-oidc-provider \
   --approve
 ```
 
-3. MAP IAM Role to K8 Serivce Account 
+### MAP IAM Role to K8 Serivce Account 
 This command will create a K8 service account, IAM Role based on policy in step #1 and annotate the K8 service account with the IAM Role. 
 
 ```
@@ -89,7 +89,7 @@ secrets:
 - name: solodev-serviceaccount-token-6k66t
 ```
 
-4. Verify IAM Role created
+### Verify IAM Role creation
 
 Go to the IAM Console and verify that the role referenced in the service account annotation above exists, and that the policy attached to the role allows calls to `RegisterUsage`. You should this policy attached to the role:
 
@@ -108,7 +108,7 @@ Go to the IAM Console and verify that the role referenced in the service account
 }
 ```
 
-5. Subscribe and Launch EKS Product
+### Subscribe and Launch EKS Product
 
 Subscribe to EKS enabled Paid Container product on AWS Marketplace [Solodev DCX Enterprise Edition for Kubernetes] (https://aws.amazon.com/marketplace/pp/B07XV951M6?qid=1571433963481&sr=0-2&ref_=srh_res_product_title).This is a paid AWS Marketplace product that will charge based on a pay-as-you-go hourly rate.
 
