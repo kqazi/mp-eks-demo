@@ -65,7 +65,13 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-Verify K8 Service account creation: `kubectl get sa solodev-serviceaccount -o yaml`. You should see output similar to the below. You'll notice that the IAM Role has been automatically created for you (using the policy supplied to the command above) and the K8 service account annotation with the IAM Role. **If the IAM Role is not in the annotation IAM Roles for Service Accounts will not work.**
+Verify K8 Service account creation: 
+
+```
+kubectl get sa solodev-serviceaccount -o yaml`. 
+```
+
+You should see output similar to the below. You'll notice that the IAM Role has been automatically created for you (using the policy supplied to the command above) and the K8 service account annotation with the IAM Role. **If the IAM Role is not in the annotation IAM Roles for Service Accounts will not work.**
 
 ```
 apiVersion: v1
