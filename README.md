@@ -110,7 +110,7 @@ Go to the IAM Console and verify that the role referenced in the service account
 
 ### Subscribe and Launch EKS Product
 
-Subscribe to EKS enabled Paid Container product on AWS Marketplace [Solodev DCX Enterprise Edition for Kubernetes] (https://aws.amazon.com/marketplace/pp/B07XV951M6?qid=1571433963481&sr=0-2&ref_=srh_res_product_title).This is a paid AWS Marketplace product that will charge based on a pay-as-you-go hourly rate.
+Subscribe to EKS enabled Paid Container product on AWS Marketplace [Solodev DCX Enterprise Edition for Kubernetes] (https://aws.amazon.com/marketplace/pp/B07XV951M6?qid=1571433963481&sr=0-2&ref_=srh_res_product_title) . This is a paid AWS Marketplace product that will charge based on a pay-as-you-go hourly rate.
 
 After you subscribe run:
 
