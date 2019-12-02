@@ -16,7 +16,7 @@
 
 ### Configure EKS Cluster
 
-This will spin up a brand new EKS cluster based in the AWS region you configured the AWS CLI to use above. This process takes 10-20 mins to complete. Note: If you run this command more than once with the same EKS cluster name it will fail.
+This will spin up a brand new EKS cluster based in the AWS region you configured the AWS CLI to use above. This process takes 10-20 mins to complete. **Note: If you run this command more than once with the same EKS cluster name it will fail.**
 
 ```
 eksctl create cluster \
@@ -31,23 +31,6 @@ eksctl create cluster \
 ```
 
 ### Configure [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
-
-1. Create IAM Policy that enables Paid Container product billing on EKS. Copy the ARN for this policy as it will be used in step #2.
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "aws-marketplace:RegisterUsage"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        }
-    ]
-}
-```
 
 ### Associate EKS OIDC Provider with IAM
 
@@ -67,7 +50,7 @@ eksctl create iamserviceaccount \
   --name solodev-serviceaccount \
   --namespace default \
   --cluster mp-eks-irsa \
-  --attach-policy-arn [iam-policy-arn-from-step-1] \
+  --attach-policy-arn arn:aws:iam::aws:policy/AWSMarketplaceMeteringRegisterUsage \
   --approve
 ```
 
