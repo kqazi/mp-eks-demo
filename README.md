@@ -120,7 +120,7 @@ helm repo update
 helm repo list
 ```
 
-Next start up Tiller in the background in your local environment:
+Next start up Tiller in a new terminal  in your **local environment**:
 
 ``` 
 tiller -listen=localhost:44134 -storage=secret -logtostderr 
