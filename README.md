@@ -29,8 +29,19 @@ eksctl create cluster \
 	--nodes-max 3 \
 	--node-ami auto
 ```
+*The command above will take ~10-15 mins to complete.*
 
-### Configure [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
+Execute the following command to double check cluster creation was successful. 
+```
+kubectl get svc
+```
+
+You should see something similar to:
+
+```
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   6m51s
+```
 
 ### Associate EKS OIDC Provider with IAM
 
