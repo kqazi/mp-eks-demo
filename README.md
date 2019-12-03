@@ -120,15 +120,21 @@ helm repo update
 helm repo list
 ```
 
-Next start up Tiller in a new terminal  in your **local environment**:
+Next start up Tiller in a **new** terminal  in your **local** environment:
 
 ``` 
 tiller -listen=localhost:44134 -storage=secret -logtostderr 
 ```
 
-Now install SoloDev:
 
+Run this command again in case you didn't when you setup Helm/Tiller. If it says it can't find tiller it's likley because this env var is missing.
 ```
+export HELM_HOST=:44134
+```
+
+Now install SoloDev:
+```
+
 helm install --name solodev-dcx charts/solodev-dcx-aws \
   --set serviceAccountName='solodev-serviceaccount' \
   --set solodev.storage.className=gp2 \
