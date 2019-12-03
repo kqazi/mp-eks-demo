@@ -10,8 +10,8 @@
 
 1. Latest [AWS CLI](https://aws.amazon.com/cli/) installed.
 2. Configure AWS CLI by running `aws configure`. The access and secret key must be mapped to an IAM user with a policy that allows cluster creation via `eksctl`. For demo purposes **only** use the Adminstrator role `arn:aws:iam::aws:policy/AdministratorAccess` to prevent permission issues. You would not use this level of permissions in a production enviornment. Also set the AWS region as `us-east-2`. You can double check this by running `aws configure get region`
-3. [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html) installed
-4. [Helm and Tiller](https://docs.aws.amazon.com/eks/latest/userguide/helm.html) configured 
+3. [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html) is configured.
+4. [Helm and Tiller](https://docs.aws.amazon.com/eks/latest/userguide/helm.html) are configured. When you install the application on your cluster you'll rely on this being configured properly.
 
 
 ### Configure EKS Cluster
