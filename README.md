@@ -11,7 +11,7 @@
 1. Latest [AWS CLI](https://aws.amazon.com/cli/) installed.
 2. Configure AWS CLI by running `aws configure`. The access and secret key must be mapped to an IAM user with a policy that allows cluster creation via `eksctl`. For demo purposes **only** use the Adminstrator role `arn:aws:iam::aws:policy/AdministratorAccess` to prevent permission issues. You would not use this level of permissions in a production enviornment. Also set the AWS region as `us-east-2`. You can double check this by running `aws configure get region`
 3. [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html) is configured.
-4. [Helm and Tiller - v2.x](https://docs.aws.amazon.com/eks/latest/userguide/helm.html) are configured. If you have Helm 3 installed you can downgrade to Helm 2 by simply downloading the [2.14.3](https://github.com/helm/helm/releases/tag/v2.14.3) binary, unpacking the binary and copying both helm and tiller binaries to the desired destination (e.g. `/usr/local/bin/helm`) 
+4. [Helm 2.x and Tiller](https://docs.aws.amazon.com/eks/latest/userguide/helm.html) are configured. **Note:** If you have Helm 3 installed you can downgrade to Helm 2 by simply downloading the [2.14.3](https://github.com/helm/helm/releases/tag/v2.14.3) binary, unpacking the binary and copying both helm and tiller binaries to the desired destination (e.g. `/usr/local/bin/helm`) 
 
 
 ### Configure EKS Cluster
